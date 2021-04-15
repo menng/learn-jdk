@@ -10,5 +10,14 @@ public class AbstractStringBuilderDemo {
         System.out.println(sb.capacity());
         System.out.println(sb.length());
 
+
+    }
+
+    public void ssss() {
+        new Thread(() -> ss()).start();
+    }
+
+    public void ss() {
+
     }
 }
