@@ -1,7 +1,10 @@
 package demo.stream;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalUnit;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class StreamTest {
@@ -42,5 +45,36 @@ public class StreamTest {
                 .limit(3)
 //                .map(String::new)
                 .forEach(System.out::println);
+
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(100L));
+        products.add(new Product(2000L));
+        products.add(new Product(80L));
+        Optional<Product> max = products.stream().max(Comparator.comparing(Product::getPrice));
+        System.out.println( max.get().getPrice());
+
+        LocalDateTime localDateTime = LocalDateTime.now().plusHours(3);
+        long l = localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println(new Date((localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli() - System.currentTimeMillis())/60 + System.currentTimeMillis()));
+
+        System.out.println("---");
+        long s = 2001 / 100L;
+        System.out.println(s);
+    }
+}
+
+class Product {
+    long price;
+
+    public Product(long price) {
+        this.price = price;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }
